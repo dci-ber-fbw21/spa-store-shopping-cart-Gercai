@@ -22,9 +22,7 @@ class ProductList extends Component {
                          <p>   {this.props.productList[key].title}</p>
                          <p>   {this.props.productList[key].price}€</p>
                         <button onClick={() => {
-                             this.props.addToCart(this.props.productList[key].id,{
-                                ProductId: 4343,
-                            });
+                             this.props.addToCart(this.props.productList[key].id);
                         }}> Add To Cart</button>
                         </section>
                         </div>
@@ -45,11 +43,11 @@ const mapStateToProps = (state,ownProps) => {
 
 const mapActionsToProps = (dispatch) => {
     return{
-        addToCart: (id) => {
+        addToCart: (productId) => {
              dispatch({
                 type: "ADD_TO_CART",
                 payload: {
-                    postId: id,
+                    productId,
                     price: "999999999999"
                 }
              });

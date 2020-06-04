@@ -10,7 +10,7 @@ const normalizedProducts = products.reduce((acc,productsEntry) => {
 
 // Products contain Product_id and quantity
 const cart = {
-    "products": [],
+    "products": {},
     "sum": 0,
 }
 
@@ -20,8 +20,16 @@ const initialState= {
 }
 
 function appReducer(state = initialState, action){
-    switch (action) {
-        case "ADD_TOCART":
+    switch (action.type) {
+        case "ADD_TO_CART":
+
+                !state.cart.products[action.payload.productId]?
+                state.cart.products[action.payload.productId] = 1:
+                state.cart.products[action.payload.productId]++;
+            
+                console.log(action.payload.productId);
+
+
             return state;
         default:
             return state;
