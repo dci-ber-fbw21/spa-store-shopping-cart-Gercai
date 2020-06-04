@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "title": "INTERNATIONALIST - Trainers",
+    "price": 123.01,
+    "inventory": 15,
+    "imageUrl": "andrew-mantarro-aRD19xeeHaQ-unsplash.jpg"
+  },
+  {
+    "id": 2,
+    "title": "SONNENBRILLE MIT METALL-AKZENTEN - Sunglasses",
+    "price": 100.65,
+    "inventory": 100,
+    "imageUrl": "annie-theby-FlP6C5pkMKs-unsplash.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Nike Sportswear BLAZER - Trainers",
+    "price": 135.49,
+    "inventory": 45,
+    "imageUrl": "basil-james-nE_N_fee8q8-unsplash.jpg"
+  },
+  {
+    "id": 4,
+    "title": "SONNENBRILLE MIT RUNDEN GLÄSERN - Sunglasses",
+    "price": 60,
+    "inventory": 85,
+    "imageUrl": "charles-deluvio-1-nx1QR5dTE-unsplash.jpg"
+  },
+  {
+    "id": 5,
+    "title": "JORA - Classic heels - silver",
+    "price": 71.95,
+    "inventory": 125,
+    "imageUrl": "gavin-allanwood-ndpX28miBtE-unsplash.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Ray-Ban CLUBMASTER - Sunglasses",
+    "price": 80.55,
+    "inventory": 1005,
+    "imageUrl": "giorgio-trovato-K62u25Jk6vo-unsplash.jpg"
+  },
+  {
+    "id": 7,
+    "title": "AIR MAX 90 - Trainers",
+    "price": 139.95,
+    "inventory": 4,
+    "imageUrl": "imani-clovis-LxVxPA1LOVM-unsplash.jpg"
+  },
+  {
+    "id": 8,
+    "title": "ANSWER - Trainers",
+    "price": 134.95,
+    "inventory": 1209,
+    "imageUrl": "matus-hatala-pFzxaKhdFME-unsplash.jpg"
+  },
+  {
+    "id": 9,
+    "title": "STESSY - High heels",
+    "price": 67.95,
+    "inventory": 300,
+    "imageUrl": "mohammad-metri-E-0ON3VGrBc-unsplash.jpg"
+  },
+  {
+    "id": 10,
+    "title": "UMNEY - High-top trainers",
+    "price": 134.95,
+    "inventory": 1250,
+    "imageUrl": "mutzii-kn7cfz5ESIE-unsplash.jpg"
+  },
+  {
+    "id": 11,
+    "title": "CHUCK TAYLOR ALL STAR DAINTY BASIC - Trainers",
+    "price": 54.95,
+    "inventory": 550,
+    "imageUrl": "rachael-ren-Ueu_6ZrVb80-unsplash.jpg"
+  }
+]
