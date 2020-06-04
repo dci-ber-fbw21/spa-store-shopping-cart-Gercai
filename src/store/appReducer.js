@@ -7,6 +7,8 @@ const normalizedProducts = products.reduce((acc,productsEntry) => {
         
 },{});
 
+
+// Products contain Product_id and quantity
 const cart = {
     "products": [],
     "sum": 0,
