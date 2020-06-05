@@ -1,63 +1,78 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import ProductList from "../productList";
+import ShoppingCart from "../shoppingCart";
+import shopCart from "../../images/icons/bag.svg"
 
 import "./index.scss";
+import shoppingCart from "../shoppingCart";
 
 class ShopHeader extends Component {
     
     state = {
-        comment: ""
+        comment: "",
+        showCart: false,
+        checkout: false
     }
 
-
-
     componentDidUpdate(){
-
-        console.log(this.props.productCount);
+        let check = this.props.productCount&&!this.state.showCart;
+        if(check)
+        {
+            this.setState({
+                showCart: true
+            })
+        }
     }
     
     render(){
-   
-   
-        console.log(this.props.productCount);
         return(
-            <div>
+            <div className="shopBody">
                 <article className="shopHeader">
                     <h1>Shop</h1>
-                    <p> ProductCount: </p>
                 </article>   
-            <ProductList></ProductList>
+           {this.state.showCart && 
+           <article className="shoppingCart">
+                <p> <img src={shopCart} alt=""/>
+                <span>  {this.props.productCount} </span></p>
+                <p>
+                <button onClick={(element) => {
+                    this.setState({
+                            checkout: true,
+                            showCart: false
+                        })
+                }}> Check </button>
+                </p>
+            </article> }
+            {!this.state.checkout &&   <ProductList></ProductList>}
+            {this.state.checkout && 
+            <article>
+                <section className="cardHead">
+                <button onClick={
+                    () => {
+                        this.setState({
+                            checkout: false
+                        })
+                    }
+                }>X</button>
+                </section>
+             <ShoppingCart></ShoppingCart> 
+             </article>
+           }
             </div>
         )
     }
 }
 
 const mapStateToProps = (state,ownProps) => {
-    
-    return {
+  return {
         productList: state.normalizedProducts,
-        productCount: state.cart
+        productCount: state.cart.sum
     }
 }
 
-// const mapActionsToProps = (dispatch) => {
-//     return{
-//         addToCart: (productId) => {
-//              dispatch({
-//                 type: "ADD_TO_CART",
-//                 payload: {
-//                     productId,
-//                     price: "999999999999"
-//                 }
-//              });
-//         }
-//     }
-// }
-
 export default connect(
     mapStateToProps,
-    // mapActionsToProps
 )(ShopHeader);
  
 // export default ShopHeader;

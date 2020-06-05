@@ -8,21 +8,27 @@ class ProductList extends Component {
         comment: ""
     }
     
+    componentDidUpdate(){
+       
+    }
+
     render(){
         return(
             <div className="productGrid">
                {
                 Object.keys(this.props.productList).map((key)=> {
+                    let product = this.props.productList[key]
                     return(
                         <div className="product">
                             <section>
                             <img src={require("../../images/" +  this.props.productList[key].imageUrl)} alt=""/> 
                             </section>                  
                         <section>
-                         <p>   {this.props.productList[key].title}</p>
-                         <p>   {this.props.productList[key].price}€</p>
+                         <p>{product.title}</p>
+                         <p>{product.price}€</p>
+                        <p>In Stock: {product.inventory}</p>
                         <button onClick={() => {
-                             this.props.addToCart(this.props.productList[key].id);
+                             this.props.addToCart(key);
                         }}> Add To Cart</button>
                         </section>
                         </div>
@@ -35,9 +41,9 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = (state,ownProps) => {
-    
     return {
-        productList: state.normalizedProducts
+        productList: state.normalizedProducts,
+        productCount: state.cart.sum
     }
 }
 
@@ -47,8 +53,7 @@ const mapActionsToProps = (dispatch) => {
              dispatch({
                 type: "ADD_TO_CART",
                 payload: {
-                    productId,
-                    price: "999999999999"
+                    productId
                 }
              });
         }
