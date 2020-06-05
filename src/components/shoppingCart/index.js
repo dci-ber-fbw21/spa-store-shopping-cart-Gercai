@@ -8,6 +8,10 @@ class ShoppingCart extends Component {
     state = {
     }
 
+    componentDidUpdate(){
+        console.log("updated");
+    }
+
     render(){
 
         console.log(this.props.cart);

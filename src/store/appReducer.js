@@ -48,7 +48,14 @@ function appReducer(state = initialState, action){
                 if(cartProducts[productId].count >0 ){
                 newState.normalizedProducts[productId].inventory++;
             }
+            cartProducts[productId].count >1?
+                cartProducts[productId].count--:
+                delete cartProducts[productId];
 
+                for (let product in cartProducts){
+                    cartCount += cartProducts[product].count;
+                }
+                newState.cart.sum = cartCount;
 
                 return {...state,
                     ...newState}
