@@ -13,8 +13,6 @@ class ShoppingCart extends Component {
     }
 
     render(){
-
-        console.log(this.props.cart);
         return(
             <div className="CheckoutCart">
 
@@ -36,6 +34,18 @@ class ShoppingCart extends Component {
                             </div>)
                         })
                     }
+
+                    <article className="Kasse">
+                        <p>Total</p>
+                        <p>{this.props.costs}</p>
+                        <button
+                        onClick= {
+                            () => {
+                                this.props.buyFromCart();
+                            }
+                        }
+                        >Buy</button>
+                    </article>
             </div>
         )
     }
@@ -45,6 +55,7 @@ class ShoppingCart extends Component {
 
 const mapActionsToProps = (dispatch) => {
     return{
+      
         removeFromCart: (productId) => {
              dispatch({
                 type: "REMOVE_FROM_CART",
@@ -52,6 +63,11 @@ const mapActionsToProps = (dispatch) => {
                     productId
                 }
              });
+        },
+        buyFromCart: () => {
+            dispatch({
+               type: "BUY_FROM_CART",
+            });
         }
     }
 }
@@ -61,7 +77,9 @@ const mapStateToProps = (state,ownProps) => {
   return {
         productList: state.normalizedProducts,
         cart: state.cart,
-        productCount: state.cart.sum
+        productCount: state.cart.sum,
+        costs: state.cart.price
+        
     }
 }
 

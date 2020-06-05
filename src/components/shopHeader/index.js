@@ -5,7 +5,6 @@ import ShoppingCart from "../shoppingCart";
 import shopCart from "../../images/icons/bag.svg"
 
 import "./index.scss";
-import shoppingCart from "../shoppingCart";
 
 class ShopHeader extends Component {
     
@@ -13,7 +12,7 @@ class ShopHeader extends Component {
         comment: "",
         showCart: false,
         checkout: false
-    }
+    } 
 
     componentDidUpdate(){
         let check = this.props.productCount&&!this.state.showCart;

@@ -9,17 +9,17 @@ const normalizedProducts = products.reduce((acc,productsEntry) => {
 const cart = {
     "products": {},
     "sum": 0,
+    "price" : 0,
 }
-
 const initialState= {
     normalizedProducts,
     cart
 }
-
 function appReducer(state = initialState, action){
     let newState = state;
     let cartProducts = newState.cart.products;
     let cartCount = 0;
+    let cartSum = 0;
     switch (action.type) {
         case "ADD_TO_CART":
         {
@@ -30,13 +30,16 @@ function appReducer(state = initialState, action){
                 }
         // Calculating for Cart 
                 !cartProducts[productId]?
-                    cartProducts[productId] = {productId, count: 1}:
+                    cartProducts[productId] = 
+                    {productId, count: 1}:
                     cartProducts[productId].count++;
                 newState.cart.sum++;  
                 for (let product in cartProducts){
                     cartCount += cartProducts[product].count;
-                }
+                    cartSum +=  cartProducts[product].count * state.normalizedProducts[productId].price;
+                }     
             newState.cart.sum = cartCount;
+            newState.cart.price = cartSum.toFixed(2);
         // Updating the State 
                 return {...state,
                         ...newState}
@@ -48,18 +51,31 @@ function appReducer(state = initialState, action){
                 if(cartProducts[productId].count >0 ){
                 newState.normalizedProducts[productId].inventory++;
             }
+                
+        // Calculating for Cart 
             cartProducts[productId].count >1?
                 cartProducts[productId].count--:
                 delete cartProducts[productId];
 
                 for (let product in cartProducts){
                     cartCount += cartProducts[product].count;
+                    cartSum   += cartProducts[product].count * state.normalizedProducts[productId].price;
                 }
-                newState.cart.sum = cartCount;
 
+                newState.cart.sum = cartCount;
+                newState.cart.price = cartSum.toFixed(2);
                 return {...state,
-                    ...newState}
+                        ...newState}
     }   
+        case "BUY_FROM_CART":
+            
+            newState.cart = {
+                "products": {},
+                "sum": 0,
+                "price" : 0,
+            }
+            return {...state,
+                ...newState}
         default:
             return state;
     }
