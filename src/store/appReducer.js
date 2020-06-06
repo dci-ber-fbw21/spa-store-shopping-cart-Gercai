@@ -1,4 +1,5 @@
 import products from "../data/products";
+import _ from "lodash";
 
 const normalizedProducts = products.reduce((acc,productsEntry) => {
     acc[productsEntry.id] = productsEntry;  
@@ -16,7 +17,7 @@ const initialState= {
     cart
 }
 function appReducer(state = initialState, action){
-    let newState = state;
+    let newState = _.cloneDeep(state)
     let cartProducts = newState.cart.products;
     let cartCount = 0;
     let cartSum = 0;
@@ -27,7 +28,7 @@ function appReducer(state = initialState, action){
         // Calculating for Products
                 if(newState.normalizedProducts[productId].inventory >0 ){
                     newState.normalizedProducts[productId].inventory--;
-                }
+                } 
         // Calculating for Cart 
                 !cartProducts[productId]?
                     cartProducts[productId] = 
@@ -65,6 +66,9 @@ function appReducer(state = initialState, action){
                 newState.cart.sum = cartCount;
                 newState.cart.price = cartSum.toFixed(2);
                 return {...state,
+
+
+    
                         ...newState}
     }   
         case "BUY_FROM_CART":
