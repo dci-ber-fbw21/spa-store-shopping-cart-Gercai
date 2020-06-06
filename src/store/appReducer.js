@@ -1,5 +1,6 @@
 import products from "../data/products";
-import _ from "lodash";
+// import _ from "lodash";
+import produce from "immer";
 
 const normalizedProducts = products.reduce((acc,productsEntry) => {
     acc[productsEntry.id] = productsEntry;  
@@ -16,9 +17,9 @@ const initialState= {
     normalizedProducts,
     cart
 }
-function appReducer(state = initialState, action){
-    let newState = _.cloneDeep(state)
-    let cartProducts = newState.cart.products;
+
+const appReducer = produce((draft = initialState, action) => {
+    let cartProducts = draft.cart.products;
     let cartCount = 0;
     let cartSum = 0;
     switch (action.type) {
@@ -26,31 +27,30 @@ function appReducer(state = initialState, action){
         {
               let productId = action.payload.productId;
         // Calculating for Products
-                if(newState.normalizedProducts[productId].inventory >0 ){
-                    newState.normalizedProducts[productId].inventory--;
+                if(draft.normalizedProducts[productId].inventory >0 ){
+                    draft.normalizedProducts[productId].inventory--;
                 } 
         // Calculating for Cart 
                 !cartProducts[productId]?
                     cartProducts[productId] = 
                     {productId, count: 1}:
                     cartProducts[productId].count++;
-                newState.cart.sum++;  
+                draft.cart.sum++;  
                 for (let product in cartProducts){
                     cartCount += cartProducts[product].count;
-                    cartSum +=  cartProducts[product].count * state.normalizedProducts[productId].price;
+                    cartSum +=  cartProducts[product].count * draft.normalizedProducts[productId].price;
                 }     
-            newState.cart.sum = cartCount;
-            newState.cart.price = cartSum.toFixed(2);
+            draft.cart.sum = cartCount;
+            draft.cart.price = cartSum.toFixed(2);
         // Updating the State 
-                return {...state,
-                        ...newState}
+        return
         }
         case "REMOVE_FROM_CART":
             {
         // Calculating fro Products
             let productId = action.payload.productId;
                 if(cartProducts[productId].count >0 ){
-                newState.normalizedProducts[productId].inventory++;
+                draft.normalizedProducts[productId].inventory++;
             }
                 
         // Calculating for Cart 
@@ -60,29 +60,92 @@ function appReducer(state = initialState, action){
 
                 for (let product in cartProducts){
                     cartCount += cartProducts[product].count;
-                    cartSum   += cartProducts[product].count * state.normalizedProducts[productId].price;
+                    cartSum   += cartProducts[product].count * draft.normalizedProducts[productId].price;
                 }
 
-                newState.cart.sum = cartCount;
-                newState.cart.price = cartSum.toFixed(2);
-                return {...state,
-
-
-    
-                        ...newState}
+                draft.cart.sum = cartCount;
+                draft.cart.price = cartSum.toFixed(2);
+                return 
     }   
         case "BUY_FROM_CART":
             
-            newState.cart = {
+            draft.cart = {
                 "products": {},
                 "sum": 0,
                 "price" : 0,
             }
-            return {...state,
-                ...newState}
+            return
         default:
-            return state;
+            return draft
     }
-}
+});
+// function appReducer(state = initialState, action){
+//     let newState = _.cloneDeep(state)
+//     let cartProducts = newState.cart.products;
+//     let cartCount = 0;
+//     let cartSum = 0;
+//     switch (action.type) {
+//         case "ADD_TO_CART":
+//         {
+//               let productId = action.payload.productId;
+//         // Calculating for Products
+//                 if(newState.normalizedProducts[productId].inventory >0 ){
+//                     newState.normalizedProducts[productId].inventory--;
+//                 } 
+//         // Calculating for Cart 
+//                 !cartProducts[productId]?
+//                     cartProducts[productId] = 
+//                     {productId, count: 1}:
+//                     cartProducts[productId].count++;
+//                 newState.cart.sum++;  
+//                 for (let product in cartProducts){
+//                     cartCount += cartProducts[product].count;
+//                     cartSum +=  cartProducts[product].count * state.normalizedProducts[productId].price;
+//                 }     
+//             newState.cart.sum = cartCount;
+//             newState.cart.price = cartSum.toFixed(2);
+//         // Updating the State 
+//                 return {...state,
+//                         ...newState}
+//         }
+//         case "REMOVE_FROM_CART":
+//             {
+//         // Calculating fro Products
+//             let productId = action.payload.productId;
+//                 if(cartProducts[productId].count >0 ){
+//                 newState.normalizedProducts[productId].inventory++;
+//             }
+                
+//         // Calculating for Cart 
+//             cartProducts[productId].count >1?
+//                 cartProducts[productId].count--:
+//                 delete cartProducts[productId];
+
+//                 for (let product in cartProducts){
+//                     cartCount += cartProducts[product].count;
+//                     cartSum   += cartProducts[product].count * state.normalizedProducts[productId].price;
+//                 }
+
+//                 newState.cart.sum = cartCount;
+//                 newState.cart.price = cartSum.toFixed(2);
+//                 return {...state,
+
+
+    
+//                         ...newState}
+//     }   
+//         case "BUY_FROM_CART":
+            
+//             newState.cart = {
+//                 "products": {},
+//                 "sum": 0,
+//                 "price" : 0,
+//             }
+//             return {...state,
+//                 ...newState}
+//         default:
+//             return state;
+//     }
+// }
 
 export default appReducer;
