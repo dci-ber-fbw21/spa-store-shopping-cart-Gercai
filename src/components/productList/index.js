@@ -7,9 +7,14 @@ class ProductList extends Component {
     state = {
         comment: ""
     }
-    
-    componentDidUpdate(){
-       
+
+    renderInventoryBanner(inventory){
+        if(inventory === 0 ){
+            return "soldOut"
+        }
+        else if( inventory <= 10){
+            return "lowStock"
+        }
     }
 
     render(){
@@ -26,7 +31,9 @@ class ProductList extends Component {
                         <section>
                          <p>{product.title}</p>
                          <p>{product.price}€</p>
-                        <p>In Stock: {product.inventory}</p>
+
+                        <div className={this.renderInventoryBanner(product.inventory)}></div>
+                        
                         <button onClick={() => {
                              this.props.addToCart(key);
                         }}> Add To Cart</button>

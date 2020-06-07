@@ -3,6 +3,7 @@ display: grid;
 grid-template-columns: auto auto auto;
 margin: 10px;
     .product{
+    position: relative;
     border: solid black 1px;
     height: 400px;
     width: 60%;
@@ -24,6 +25,29 @@ margin: 10px;
             button{
                 width: 100px;
                 border-radius: 5px;
+            }
+
+            div{
+                display: none;
+                border: black solid 2px;
+                top: 0;
+                right: 0;
+                height: 50px;
+                width: 100px;
+                border-radius: 5px;
+                position: absolute;
+            }
+            .lowStock{
+                display: block;
+                &:before{
+                    content: "Limited";     
+                 }
+            }
+            .soldOut{
+                display: block;
+                &:before{
+                    content: "Sold out";  
+                 }
             }
   }
     }

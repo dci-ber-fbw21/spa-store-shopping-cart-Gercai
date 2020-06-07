@@ -4,22 +4,16 @@ import {connect} from "react-redux";
 import "./index.scss";
 
 class ShoppingCart extends Component {
-    
-    state = {
-    }
-
-    componentDidUpdate(){
-        console.log("updated");
-    }
 
     render(){
         return(
             <div className="CheckoutCart">
 
                     {
-                        Object.keys(this.props.cart.products).map((key) => {
+                 Object.keys(this.props.cart.products).length > 0?
+                 Object.keys(this.props.cart.products).map((key) => {
                              return(
-                                 <div>   
+                                 <article>   
                              <article className="cartProduct"> 
                             <img src={require("../../images/" +  this.props.productList[key].imageUrl)} alt={this.props.productList[key].title}/>
                             <section> 
@@ -31,11 +25,8 @@ class ShoppingCart extends Component {
                             <button onClick={() => {
                         this.props.removeFromCart(key);
                             }}>Remove</button>
-                            </div>)
-                        })
-                    }
-
-                    <article className="Kasse">
+                            
+                            <section className="Kasse">
                         <p>Total</p>
                         <p>{this.props.costs}</p>
                         <button
@@ -45,13 +36,18 @@ class ShoppingCart extends Component {
                             }
                         }
                         >Buy</button>
-                    </article>
+                    </section>
+                            </article>)
+                    }):
+
+                        <article>
+                            <img src={require("../../images/icons/hanger.svg")} alt="hanger"></img> 
+                        </article>
+                    }
             </div>
         )
     }
 }
-
-
 
 const mapActionsToProps = (dispatch) => {
     return{
