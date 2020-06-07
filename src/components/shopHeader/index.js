@@ -8,70 +8,74 @@ import "./index.scss";
 
 class ShopHeader extends Component {
     
-    state = {
-        comment: "",
-        showCart: false,
-        checkout: false
-    } 
-
-    componentDidUpdate(){
-        let check = this.props.productCount&&!this.state.showCart;
-        if(check)
-        {
-            this.setState({
-                showCart: true
-            })
-        }
-    }
-    
     render(){
         return(
             <div className="shopBody">
                 <article className="shopHeader">
                     <h1>Shop</h1>
                 </article>   
-           {this.state.showCart && 
+           {this.props.cartOn && 
            <article className="shoppingCart">
                 <p> <img src={shopCart} alt=""/>
                 <span>  {this.props.productCount} </span></p>
                 <p>
-                <button onClick={(element) => {
-                    this.setState({
-                            checkout: true,
-                            showCart: false
-                        })
-                }}> Check </button>
-                </p>
-            </article> }
-            {!this.state.checkout &&   <ProductList></ProductList>}
-            {this.state.checkout && 
-            <article>
-                <section className="cardHead">
                 <button onClick={
                     () => {
-                        this.setState({
-                            checkout: false
-                        })
+                        this.props.toggleCheckOn();
                     }
-                }>X</button>
+                }> Check </button>
+                </p>
+            </article> }
+            {!this.props.check?<ProductList></ProductList>: 
+            <article>
+                <section className="cardHead">
+                <button className="backTo" onClick={
+                    () => {
+                        this.props.toggleCheckOff();
+                        if(this.props.productCount>0){
+                           this.props.toggleCartOn();
+                        }
+                    }
+                }>Back To Products</button>
                 </section>
              <ShoppingCart></ShoppingCart> 
              </article>
-           }
+            }
             </div>
         )
     }
 }
 
-const mapStateToProps = (state,ownProps) => {
+const mapActionsToProps = (dispatch) => {
+    return{
+        toggleCheckOn: () => {
+            dispatch({
+                type: "CHECK_ON",
+            })
+        },
+        toggleCheckOff: () => {
+            dispatch({
+                type: "CHECK_OFF",
+            })
+        },
+        toggleCartOn: () => {
+            dispatch({
+                type: "TOGGLE_ON",
+            })
+        }
+    }
+}
+
+const mapStateToProps = (state) => {
   return {
-        productList: state.normalizedProducts,
-        productCount: state.cart.sum
+        productList: state.cartReducer.normalizedProducts,
+        productCount: state.cartReducer.cart.sum,
+        cartOn: state.cartFilter.cartToggler.toggle,
+        check: state.cartFilter.cartToggler.check
     }
 }
 
 export default connect(
     mapStateToProps,
+    mapActionsToProps
 )(ShopHeader);
- 
-// export default ShopHeader;

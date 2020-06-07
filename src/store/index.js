@@ -1,5 +1,7 @@
 import appReducer from "./appReducer";
-const { createStore, compose, applyMiddleware} = require('redux');
+import appFilter from "./appFilter";
+
+const { createStore, compose, applyMiddleware,combineReducers} = require('redux');
 
 // // Be sure to ONLY add this middleware in development!
 const middleware = process.env.NODE_ENV !== 'production' ?
@@ -10,7 +12,7 @@ const middleware = process.env.NODE_ENV !== 'production' ?
 // Note passing middleware as the last argument to createStore requires redux@>=3.1.0
 
 const store = createStore(
-    appReducer,
+    combineReducers({cartFilter:appFilter, cartReducer:appReducer}),
     compose(applyMiddleware(...middleware),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 );

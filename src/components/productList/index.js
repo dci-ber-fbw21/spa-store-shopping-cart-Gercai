@@ -4,9 +4,6 @@ import "./index.scss";
 
 class ProductList extends Component {
     
-    state = {
-        comment: ""
-    }
 
     renderInventoryBanner(inventory){
         if(inventory === 0 ){
@@ -19,6 +16,7 @@ class ProductList extends Component {
 
     render(){
         return(
+            <article className="gridCentering">
             <div className="productGrid">
                {
                 Object.keys(this.props.productList).map((key)=> {
@@ -34,23 +32,31 @@ class ProductList extends Component {
 
                         <div className={this.renderInventoryBanner(product.inventory)}></div>
                         
-                        <button onClick={() => {
-                             this.props.addToCart(key);
-                        }}> Add To Cart</button>
+                        <button     
+                            onClick={() => { 
+                                                this.props.toggleCartOn(); 
+                                                this.props.addToCart(key);
+                                            }}
+                            disabled = {product.inventory===0?true:false}    
+                        >Put in Cart </button>
+
                         </section>
                         </div>
                     )
                 })
                }
             </div>
+            </article>
         )
     }
 }
 
 const mapStateToProps = (state,ownProps) => {
     return {
-        productList: state.normalizedProducts,
-        productCount: state.cart.sum
+        cartOn: state.cartFilter.cartToggler.toggle,
+        productList: state.cartReducer.normalizedProducts,
+        productCount: state.cartReducer.cart.sum,
+       
     }
 }
 
@@ -63,6 +69,11 @@ const mapActionsToProps = (dispatch) => {
                     productId
                 }
              });
+        },
+        toggleCartOn: () => {
+            dispatch({
+                type: "TOGGLE_ON",
+            })
         }
     }
 }

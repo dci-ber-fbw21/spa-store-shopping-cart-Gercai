@@ -40,6 +40,7 @@ const appReducer = produce((draft = initialState, action) => {
                     cartCount += cartProducts[product].count;
                     cartSum +=  cartProducts[product].count * draft.normalizedProducts[productId].price;
                 }     
+                
             draft.cart.sum = cartCount;
             draft.cart.price = cartSum.toFixed(2);
         // Updating the State 

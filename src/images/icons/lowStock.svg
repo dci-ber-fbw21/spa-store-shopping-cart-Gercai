@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<text transform="scale(.9008 1.1101)" x="2.9646423" y="13.148436" fill="#ff6600" font-family="Ravie" font-size="6.4524px" stroke-width="1.2098" style="line-height:1.25" xml:space="preserve"><tspan x="2.9646423" y="13.148436" fill="#ff6600" stroke-width="1.2098">low</tspan></text>
+<text transform="scale(.87369 1.1446)" x="6.1115189" y="20.18116" fill="#ff6600" font-family="Ravie" font-size="6.289px" stroke-width="1.1792" style="line-height:1.25" xml:space="preserve"><tspan x="6.1115189" y="20.18116" fill="#ff6600" stroke-width="1.1792">Stock</tspan></text>
+<path d="m12 2s0.48002-0.087261 2.2031-0.026284c1.2286 0.043478 3.0223 0.20561 4.8554 0.76728l2e-6 4e-7c0.89601 0.27455 1.7767 0.63686 2.6005 1.1098l2e-6 1.3e-6c0.86534 0.4968 1.6328 1.0955 2.2872 1.8034l1e-6 1.3e-6c0.73513 0.7953 1.2909 1.6886 1.6962 2.6572 0.53399 1.2761 0.7635 2.5794 0.85939 3.7301l0.49827-0.041523 0.49827-0.04152c-0.10202-1.2242-0.37576-2.6396-1.0039-4.0199-0.47833-1.0511-1.1289-2.0093-1.9718-2.8428l-1e-6 -1.3e-6c-0.74877-0.74045-1.6092-1.3428-2.5527-1.8216l-2e-6 -1.3e-6c-0.89712-0.45522-1.8394-0.78348-2.7785-1.0152l-1e-6 -3e-7c-1.9195-0.47366-3.7522-0.52606-4.9884-0.48272-1.7388 0.060963-2.2031 0.22372-2.2031 0.22372z" fill="#f60"/>
+</svg>

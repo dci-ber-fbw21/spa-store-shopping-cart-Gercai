@@ -11,6 +11,7 @@ class ShoppingCart extends Component {
 
                     {
                  Object.keys(this.props.cart.products).length > 0?
+                 <div>{
                  Object.keys(this.props.cart.products).map((key) => {
                              return(
                                  <article>   
@@ -26,24 +27,24 @@ class ShoppingCart extends Component {
                         this.props.removeFromCart(key);
                             }}>Remove</button>
                             
-                            <section className="Kasse">
-                        <p>Total</p>
-                        <p>{this.props.costs}</p>
-                        <button
-                        onClick= {
-                            () => {
-                                this.props.buyFromCart();
-                            }
-                        }
-                        >Buy</button>
-                    </section>
+                      
                             </article>)
-                    }):
-
+                    })}
+                     <section className="Kasse">
+                            <p>Total</p>
+                            <p>{this.props.costs}</p>
+                            <button
+                            onClick= {
+                                () => {
+                                    this.props.buyFromCart(); this.props.toggleCheckOff();                   
+                                }
+                            }
+                        >Buy</button>
+                        </section>
+                    </div>:
                         <article>
                             <img src={require("../../images/icons/hanger.svg")} alt="hanger"></img> 
-                        </article>
-                    }
+                        </article>}
             </div>
         )
     }
@@ -64,18 +65,28 @@ const mapActionsToProps = (dispatch) => {
             dispatch({
                type: "BUY_FROM_CART",
             });
+        },
+        toggleCheckOff: () => {
+            dispatch({
+                type: "CHECK_OFF",
+            })
+        },
+        toggleCartOn: () => {
+            dispatch({
+                type: "TOGGLE_ON",
+            })
         }
+
     }
 }
 
-
 const mapStateToProps = (state,ownProps) => {
   return {
-        productList: state.normalizedProducts,
-        cart: state.cart,
-        productCount: state.cart.sum,
-        costs: state.cart.price
-        
+        productList: state.cartReducer.normalizedProducts,
+        cart: state.cartReducer.cart,
+        productCount: state.cartReducer.cart.sum,
+        costs: state.cartReducer.cart.price,
+        check: state.cartFilter.cartToggler.check
     }
 }
 

@@ -2,6 +2,21 @@
 
 }
 
+.shopHeader{
+    border-top: solid orange 2px;
+    p,h1,h2{
+        text-align: left;
+        padding-left: 20px;
+    }
+}
+
+.backTo{
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px black;
+}
+
 .shoppingCart{
 
 background-color: white;

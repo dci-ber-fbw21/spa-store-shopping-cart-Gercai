@@ -1,12 +1,14 @@
 .productGrid{
 display: grid;
-grid-template-columns: auto auto auto;
-margin: 10px;
+grid-template-columns: auto auto auto auto;
+width: 80%;
     .product{
-    position: relative;
-    border: solid black 1px;
+    position: relative; 
+    box-shadow: 0 10px 10px black;
     height: 400px;
-    width: 60%;
+    width: 90%;
+    margin: 10px;
+    border-radius: 2px;
 
         :nth-child(1){
             height: 60%;
@@ -29,26 +31,38 @@ margin: 10px;
 
             div{
                 display: none;
-                border: black solid 2px;
                 top: 0;
                 right: 0;
                 height: 50px;
                 width: 100px;
                 border-radius: 5px;
                 position: absolute;
-            }
-            .lowStock{
-                display: block;
-                &:before{
-                    content: "Limited";     
-                 }
-            }
-            .soldOut{
-                display: block;
-                &:before{
-                    content: "Sold out";  
-                 }
+                &.lowStock{
+                    display: block;  
+                        border-radius: 100%;
+                        display: block;
+                        background: url(../../images/icons/lowStock.svg);
+                        background-size: 100px 82px;
+                        width: 100px;
+                        height: 82px; 
+                }
+                &.soldOut{
+                    border-radius: 100%;
+                    display: block;
+                    background: url(../../images/icons/soldOut.svg);
+                    background-size: 100px 82px;
+                    width: 100px;
+                    height: 82px;
+                }
+     
             }
   }
     }
+}
+
+.gridCentering{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
