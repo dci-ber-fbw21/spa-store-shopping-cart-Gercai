@@ -16,14 +16,9 @@ class ShopHeader extends Component {
                 </article>   
            {this.props.cartOn && 
            <article className="shoppingCart">
-                <p> <img src={shopCart} alt=""/>
-                <span>  {this.props.productCount} </span></p>
+                <p><img src={shopCart} alt=""/><span>{this.props.productCount}</span></p>
                 <p>
-                <button onClick={
-                    () => {
-                        this.props.toggleCheckOn();
-                    }
-                }> Check </button>
+                    <button onClick={() => {this.props.toggleCheckOn();}}> Check </button>
                 </p>
             </article> }
             {!this.props.check?<ProductList></ProductList>: 

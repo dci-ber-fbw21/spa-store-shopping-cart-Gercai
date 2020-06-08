@@ -8,7 +8,6 @@ class ShoppingCart extends Component {
     render(){
         return(
             <div className="CheckoutCart">
-
                     {
                  Object.keys(this.props.cart.products).length > 0?
                  <div>{
@@ -26,8 +25,6 @@ class ShoppingCart extends Component {
                             <button onClick={() => {
                         this.props.removeFromCart(key);
                             }}>Remove</button>
-                            
-                      
                             </article>)
                     })}
                      <section className="Kasse">
@@ -52,7 +49,6 @@ class ShoppingCart extends Component {
 
 const mapActionsToProps = (dispatch) => {
     return{
-      
         removeFromCart: (productId) => {
              dispatch({
                 type: "REMOVE_FROM_CART",
@@ -76,7 +72,6 @@ const mapActionsToProps = (dispatch) => {
                 type: "TOGGLE_ON",
             })
         }
-
     }
 }
 
